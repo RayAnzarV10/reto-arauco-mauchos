@@ -161,7 +161,7 @@ export function ScrollHeroSection({ isAuthenticated }: ScrollHeroSectionProps) {
                   <div className="mt-8">
                     {!isAuthenticated ? (
                       <Link
-                        href="/sign-up"
+                        href="/dashboard/macroeconomia"
                         className="inline-block px-6 py-3 rounded-lg bg-white text-black hover:bg-white/90 transition-colors font-semibold"
                       >
                         Empezar ahora
