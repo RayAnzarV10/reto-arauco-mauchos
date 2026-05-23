@@ -73,24 +73,27 @@ const MOCK_EFICIENCIA: ChartSeries = {
 
 const MOCK_MACRO: MacroGroup[] = [
   {
-    category: "Tipo de cambio",
+    category: "Divisas",
     items: [
-      { label: "USD/MXN", value: 17.25, display: "17.25", unit: "MXN", change: -0.8 },
-      { label: "USD/CLP", value: 920, display: "920", unit: "CLP", change: 1.2 },
+      { label: "USD / MXN", value: 17.31, display: null, unit: "MXN", change: 0.08 },
+      { label: "USD / CLP", value: 900.71, display: null, unit: "CLP", change: 0.33 },
+      { label: "EUR / USD", value: 1.1605, display: null, unit: "USD", change: -0.17 },
     ],
   },
   {
     category: "Commodities",
     items: [
-      { label: "Celulosa BHKP", value: 645, display: "645", unit: "USD/ton", change: 2.1 },
-      { label: "Madera aserrada", value: 380, display: "380", unit: "USD/m³", change: -0.5 },
+      { label: "Urea", value: 2.91, display: null, unit: "Proxy: Gas Natural HH", change: -3.68 },
+      { label: "Metanol", value: 2.91, display: null, unit: "Proxy: Gas Natural HH", change: -3.68 },
+      { label: "Petróleo Brent", value: 103.54, display: null, unit: "USD/bbl", change: 0.94 },
     ],
   },
   {
-    category: "Tasas",
+    category: "Tasas & Macro",
     items: [
-      { label: "Fed Funds Rate", value: 5.25, display: "5.25%", unit: "%", change: 0 },
-      { label: "Banxico", value: 11.0, display: "11.0%", unit: "%", change: -0.25 },
+      { label: "Tasa Banxico", value: 6.50, display: null, unit: "%", change: null },
+      { label: "Tasa Fed", value: null, display: "3.50–3.75", unit: "%", change: null },
+      { label: "Inflación México (IPC)", value: 4.45, display: null, unit: "% anual", change: null },
     ],
   },
 ];
