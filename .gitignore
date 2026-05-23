@@ -1,0 +1,11 @@
+﻿# Dependencies
+frontend/node_modules/
+backend/__pycache__/
+backend/*.pyc
+
+# Build
+frontend/.next/
+
+# Env
+frontend/.env.local
+backend/.env
