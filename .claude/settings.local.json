@@ -1,0 +1,44 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Start-Process -FilePath \"cmd.exe\" -ArgumentList \"/c\",\"npm run dev > `\"$env:TEMP\\\\arauco_frontend.log`\" 2>&1\" -WorkingDirectory \"c:\\\\Users\\\\rayfc\\\\Documents\\\\Programación\\\\Reto ARAUCO\\\\frontend\" -WindowStyle Hidden)",
+      "PowerShell(Start-Sleep -Seconds 6; Get-Content \"$env:TEMP\\\\arauco_frontend.log\")",
+      "Bash(node -e \"const idx = require\\('c:/Users/rayfc/Documents/Programación/Reto ARAUCO/frontend/node_modules/@clerk/nextjs'\\); console.log\\(Object.keys\\(idx\\).filter\\(k => k.toLowerCase\\(\\).includes\\('sign'\\) || k.toLowerCase\\(\\).includes\\('clerk'\\) || k.toLowerCase\\(\\).includes\\('user'\\)\\).sort\\(\\).join\\('\\\\n'\\)\\)\")",
+      "Read(//c/Users/rayfc/Documents/Programaci�n/Reto ARAUCO/frontend/node_modules/next/**)",
+      "PowerShell(Stop-Process -Name \"node\" -ErrorAction SilentlyContinue; Start-Sleep -Seconds 1; Start-Process -FilePath \"cmd.exe\" -ArgumentList \"/c\",\"npm run dev > `\"$env:TEMP\\\\arauco_frontend.log`\" 2>&1\" -WorkingDirectory \"c:\\\\Users\\\\rayfc\\\\Documents\\\\Programación\\\\Reto ARAUCO\\\\frontend\" -WindowStyle Hidden; Start-Sleep -Seconds 8; Get-Content \"$env:TEMP\\\\arauco_frontend.log\")",
+      "PowerShell(Invoke-WebRequest -Uri \"http://localhost:3000\" -UseBasicParsing)",
+      "PowerShell($r = Invoke-WebRequest -Uri \"http://localhost:3000\" -UseBasicParsing -TimeoutSec 10; Write-Host \"Status: $\\($r.StatusCode\\)\"; Write-Host \"Content-Length: $\\($r.Content.Length\\)\")",
+      "PowerShell(New-Item -ItemType Directory -Force -Path \"c:\\\\Users\\\\rayfc\\\\Documents\\\\Programaci�n\\\\Reto ARAUCO\\\\frontend\\\\components\\\\ui\")",
+      "PowerShell(Start-Sleep -Seconds 4; Get-Content \"$env:TEMP\\\\arauco_frontend.log\" | Select-Object -Last 20)",
+      "PowerShell(Stop-Process -Name \"node\" -ErrorAction SilentlyContinue)",
+      "PowerShell(Stop-Process -Name \"python\" -ErrorAction SilentlyContinue)",
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\rayfc\\\\Documents\\\\Programación\\\\Reto ARAUCO\\\\frontend\\\\app\" -Recurse -Force)",
+      "Bash(Select-Object FullName, Length)",
+      "Bash(Format-Table -AutoSize)",
+      "mcp__claude_ai_LSEG__fx_spot_price",
+      "mcp__claude_ai_LSEG__important_company_news",
+      "mcp__claude_ai_LSEG__qa_macroeconomic",
+      "mcp__claude_ai_LSEG__ixm_list_indexes",
+      "Bash(venv\\\\Scripts\\\\pip install *)",
+      "PowerShell(Invoke-WebRequest -Uri \"http://localhost:8000/health\" -UseBasicParsing 2>&1)",
+      "PowerShell(Invoke-WebRequest -Uri \"http://localhost:8000/health\" -UseBasicParsing)",
+      "PowerShell(Invoke-WebRequest -Uri \"http://localhost:8000/api/dashboard/macro\" -UseBasicParsing)",
+      "PowerShell(python --version)",
+      "PowerShell(python -c \"import sys; print\\(sys.executable\\)\")",
+      "PowerShell(ngrok version 2>&1)",
+      "PowerShell(Get-Command ngrok -ErrorAction SilentlyContinue)",
+      "PowerShell(ngrok http 3000 2>&1)",
+      "PowerShell(Invoke-WebRequest -Uri \"http://localhost:4040/api/tunnels\" -UseBasicParsing)",
+      "PowerShell(Stop-Process -Name \"ngrok\" -Force -ErrorAction SilentlyContinue)",
+      "PowerShell(ngrok http 3000 --request-header-add \"ngrok-skip-browser-warning: true\")",
+      "PowerShell(python -m json.tool 2>&1)",
+      "PowerShell(Stop-Process -Name \"uvicorn\" -Force -ErrorAction SilentlyContinue)",
+      "PowerShell(Stop-Process -Name \"python\" -Force -ErrorAction SilentlyContinue)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\rayfc\\Documents\\Programaci�n\\Reto ARAUCO\\frontend\\app",
+      "c:\\Users\\rayfc\\Documents\\Programaci�n\\Reto ARAUCO\\frontend",
+      "c:\\Users\\rayfc\\Documents\\Programaci�n\\Reto ARAUCO\\frontend\\app\\dashboard"
+    ]
+  }
+}
