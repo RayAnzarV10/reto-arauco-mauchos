@@ -12,7 +12,6 @@ export async function login(_: unknown, formData: FormData) {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
-      maxAge: 60 * 60 * 24 * 7, // 7 días
       path: "/",
     });
     redirect("/dashboard");
