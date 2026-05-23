@@ -3,8 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { Button } from "@/components/ui/button";
-import UserButtonWrapper from "@/components/UserButtonWrapper";
 
 const sideImages = [
   { src: "/arauco-es-mexico4-990Wx500H.jpeg", alt: "ARAUCO operación México", position: "left" },
@@ -13,11 +11,7 @@ const sideImages = [
   { src: "/iir_industry_news_pulp_paper_wood_article_thumbnail_04.webp", alt: "Industria forestal", position: "right" },
 ];
 
-interface ScrollHeroSectionProps {
-  isAuthenticated: boolean;
-}
-
-export function ScrollHeroSection({ isAuthenticated }: ScrollHeroSectionProps) {
+export function ScrollHeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
 
@@ -67,23 +61,12 @@ export function ScrollHeroSection({ isAuthenticated }: ScrollHeroSectionProps) {
               className="brightness-0 invert"
             />
           </div>
-          {!isAuthenticated ? (
-            <div className="flex items-center">
-              <Link href="/sign-in">
-                <Button variant="ghost" className="text-white cursor-pointer hover:bg-white/20">
-                  Iniciar Sesión
-                </Button>
-              </Link>
-              <div className="w-px h-4 bg-white/40 mx-1" />
-              <Link href="/sign-up">
-                <Button variant="ghost" className="text-white cursor-pointer hover:bg-white/20">
-                  Regístrate
-                </Button>
-              </Link>
-            </div>
-          ) : (
-            <UserButtonWrapper />
-          )}
+          <Link
+            href="/dashboard"
+            className="text-sm font-semibold text-white/80 hover:text-white transition-colors"
+          >
+            Entrar →
+          </Link>
         </header>
 
         <div className="flex h-full w-full items-center justify-center">
@@ -159,21 +142,12 @@ export function ScrollHeroSection({ isAuthenticated }: ScrollHeroSectionProps) {
                     Inteligencia financiera para anticipar, no reaccionar.
                   </p>
                   <div className="mt-8">
-                    {!isAuthenticated ? (
-                      <Link
-                        href="/dashboard/macroeconomia"
-                        className="inline-block px-6 py-3 rounded-lg bg-white text-black hover:bg-white/90 transition-colors font-semibold"
-                      >
-                        Empezar ahora
-                      </Link>
-                    ) : (
-                      <Link
-                        href="/dashboard"
-                        className="inline-block px-6 py-3 rounded-lg bg-white text-black hover:bg-white/90 transition-colors font-semibold"
-                      >
-                        Ir al Dashboard
-                      </Link>
-                    )}
+                    <Link
+                      href="/dashboard"
+                      className="inline-block px-6 py-3 rounded-lg bg-white text-black hover:bg-white/90 transition-colors font-semibold"
+                    >
+                      Ir al Dashboard
+                    </Link>
                   </div>
                 </div>
               </div>

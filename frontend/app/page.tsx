@@ -4,7 +4,7 @@ import { InfoSection } from "@/components/info-section";
 export default function Home() {
   return (
     <main>
-      <ScrollHeroSection isAuthenticated={false} />
+      <ScrollHeroSection />
       <InfoSection />
     </main>
   );
