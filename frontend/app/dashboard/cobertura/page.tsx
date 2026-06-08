@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { PayoffChart } from "@/components/PayoffChart";
+import { PnlTable } from "@/components/PnlTable";
+import { OpenLayerInfo } from "@/components/OpenLayerInfo";
 
 // ── Data from the model ───────────────────────────────────────────────────────
 const SPOT = 17.4563;
@@ -9,43 +11,28 @@ const NOTIONAL_COV = 14_621_460;
 const PRIMA_HIBRIDA = 1.09; // M MXN
 const PRIMA_VANILLA = 5.54; // M MXN
 
-// P&L table (M MXN, from model)
-const PNL = [
-  { st: 16.50, sinCob: 19.975, forward: 2.291, vanilla: 14.258, spread: 16.040, sintetico: 2.291, hibrida: 6.219 },
-  { st: 17.50, sinCob: -0.913, forward: -3.976, vanilla: -6.630, spread: -4.847, sintetico: -3.976, hibrida: -4.225 },
-  { st: 18.00, sinCob: -11.357, forward: -7.109, vanilla: -17.074, spread: -15.291, sintetico: -7.109, hibrida: -9.447 },
-  { st: 19.00, sinCob: -32.244, forward: -13.375, vanilla: -23.340, spread: -21.558, sintetico: -13.375, hibrida: -15.713 },
-  { st: 20.00, sinCob: -53.132, forward: -19.642, vanilla: -29.606, spread: -42.446, sintetico: -19.642, hibrida: -26.157 },
+// Minimal chart points (full P&L data lives in PnlTable)
+const CHART_PTS = [
+  { st: 16.50, sinCob: 19.975, hibrida: 6.219 },
+  { st: 17.50, sinCob: -0.913, hibrida: -4.225 },
+  { st: 18.00, sinCob: -11.357, hibrida: -9.447 },
+  { st: 19.00, sinCob: -32.244, hibrida: -15.713 },
+  { st: 20.00, sinCob: -53.132, hibrida: -26.157 },
 ];
 
-// Protection chart series
 const SIN_COB_SERIES = {
   label: "Sin cobertura",
   color: "#ef4444",
   strokeWidth: 2,
-  points: PNL.map((r) => ({ x: r.st, y: r.sinCob })),
+  points: CHART_PTS.map((r) => ({ x: r.st, y: r.sinCob })),
 };
 const HIBRIDA_SERIES = {
   label: "Estrategia híbrida",
   color: "#059669",
   strokeWidth: 2.5,
-  points: PNL.map((r) => ({ x: r.st, y: r.hibrida })),
+  points: CHART_PTS.map((r) => ({ x: r.st, y: r.hibrida })),
 };
 
-// ── Helpers ───────────────────────────────────────────────────────────────────
-function fmtM(v: number) {
-  if (v === 0) return "—";
-  const abs = Math.abs(v);
-  const str = abs.toFixed(1) + " M";
-  return v < 0 ? `(${str})` : str;
-}
-
-function cellColor(v: number) {
-  if (v > 0) return "text-emerald-600 font-semibold";
-  if (v < -20) return "text-red-600 font-semibold";
-  if (v < -10) return "text-red-500";
-  return "text-gray-700";
-}
 
 const INSTRUMENTS = [
   { label: "Forward OTC", href: "/dashboard/cobertura/forward", tag: "Certidumbre máxima", color: "bg-blue-50 text-blue-700 border-blue-100", desc: "Fija el tipo de cambio hoy. Sin prima. Sin beneficio si el MXN se aprecia." },
@@ -128,6 +115,7 @@ export default function CoberturaPage() {
                   </div>
                 </div>
                 <p className="text-[10px] text-gray-600">{layer.notional}</p>
+                {layer.label === "Abierto" && <OpenLayerInfo />}
               </div>
             ))}
 
@@ -190,42 +178,7 @@ export default function CoberturaPage() {
       </div>
 
       {/* ── P&L table ── */}
-      <div className="rounded-2xl bg-white border border-gray-100 shadow-sm overflow-hidden">
-        <div className="px-6 pt-5 pb-3 border-b border-gray-100">
-          <p className="text-xs font-semibold tracking-widest text-gray-400 uppercase">
-            P&amp;L total por estrategia y escenario (M MXN)
-          </p>
-          <p className="text-[11px] text-gray-400 mt-1">
-            Valores entre paréntesis representan deterioro vs. presupuesto base. Notional cubierto = 70% de la exposición.
-          </p>
-        </div>
-        <div className="overflow-x-auto">
-          <table className="w-full text-xs">
-            <thead>
-              <tr className="border-b border-gray-100">
-                {["ST USD/MXN", "Sin cobertura", "Forward", "Opción Vanilla", "Bull Call Spread", "Sintético", "Híbrida"].map((h, i) => (
-                  <th key={h} className={`px-4 py-3 text-left font-semibold tracking-wider uppercase text-[10px] ${i === 6 ? "text-emerald-600 bg-emerald-50" : "text-gray-400"}`}>
-                    {h}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-50">
-              {PNL.map((row) => (
-                <tr key={row.st} className="hover:bg-gray-50">
-                  <td className="px-4 py-3 font-bold text-gray-900">{row.st.toFixed(2)}</td>
-                  <td className={`px-4 py-3 ${cellColor(row.sinCob)}`}>{fmtM(row.sinCob)}</td>
-                  <td className={`px-4 py-3 ${cellColor(row.forward)}`}>{fmtM(row.forward)}</td>
-                  <td className={`px-4 py-3 ${cellColor(row.vanilla)}`}>{fmtM(row.vanilla)}</td>
-                  <td className={`px-4 py-3 ${cellColor(row.spread)}`}>{fmtM(row.spread)}</td>
-                  <td className={`px-4 py-3 ${cellColor(row.sintetico)}`}>{fmtM(row.sintetico)}</td>
-                  <td className={`px-4 py-3 bg-emerald-50 ${cellColor(row.hibrida)}`}>{fmtM(row.hibrida)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <PnlTable />
 
       {/* ── Protection summary cards ── */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
