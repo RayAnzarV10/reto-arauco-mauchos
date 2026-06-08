@@ -109,13 +109,13 @@ export function PnlTable() {
                       {row.label}
                     </p>
                   </td>
-                  <td className={`px-4 py-3 text-right ${cellCls(row.sinCob)}`}>
+                  <td className={`px-4 py-3 text-right text-base ${cellCls(row.sinCob)}`}>
                     {fmtM(row.sinCob)}
                   </td>
-                  <td className={`px-4 py-3 text-right bg-emerald-50 ${cellCls(row.hibrida)}`}>
+                  <td className={`px-4 py-3 text-right text-base bg-emerald-50 ${cellCls(row.hibrida)}`}>
                     {fmtM(row.hibrida)}
                   </td>
-                  <td className={`px-4 py-3 text-right bg-blue-50 ${cellCls(row[selected])}`}>
+                  <td className={`px-4 py-3 text-right text-base bg-blue-50 ${cellCls(row[selected])}`}>
                     {fmtM(row[selected])}
                   </td>
                 </tr>
