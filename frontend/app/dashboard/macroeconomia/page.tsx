@@ -10,11 +10,11 @@ const TOOLTIPS: Record<string, string> = {
   "EUR / USD":
     "Relevante para maquinaria y repuestos europeos de las líneas de producción. Un euro fuerte encarece mantenimiento.",
   Urea:
-    "Insumo petroquímico para resinas urea-formaldehído usadas en MDF y aglomerado. Cotización OTC; usamos gas natural Henry Hub como proxy (ambos derivan del gas).",
+    "Insumo petroquímico para resinas urea-formaldehído usadas en MDF y aglomerado. Precio histórico de compra según nota del socio formador (Entregable Final Jun 2026). ARAUCO México compra ~3,000 t/mes.",
   Metanol:
-    "Insumo para resinas melamínicas y adhesivos. Sin ticker público; proxy gas natural HH refleja su principal materia prima.",
+    "Insumo para resinas melamínicas y adhesivos. Precio histórico de compra según nota del socio formador (Entregable Final Jun 2026). ARAUCO México compra ~1,000 t/mes.",
   "Petróleo Brent":
-    "Driver de costos logísticos (fletes marítimos, transporte terrestre) y de insumos petroquímicos. Choque actual: +17.9% YoY en energía.",
+    "Driver de costos logísticos (fletes marítimos, transporte terrestre) y de insumos petroquímicos. Nivel actual: +17.9% YoY vs base ~$72/bbl pre-choque. Pico del episodio de Medio Oriente 2026: ~$120/bbl.",
   "Tasa Banxico":
     "Política monetaria mexicana. Diferencial con Fed (~287.5 pb) sostiene al peso vía carry trade. Ciclo de recortes cerrado en mayo 2026.",
   "Tasa Fed":
@@ -153,7 +153,7 @@ export default async function VariablesPage() {
           {/* Hero derecho: divisas en vivo */}
           <div className="border-t lg:border-t-0 lg:border-l border-white/[0.08] p-8 lg:p-10 flex flex-col gap-4">
             <p className="text-[11px] tracking-[0.22em] font-semibold text-gray-500 uppercase">
-              Tipos de cambio en vivo
+              Tipos de cambio · Jun 2026
             </p>
             <div className="flex flex-col gap-3 flex-1 justify-center">
               {groups

@@ -71,28 +71,40 @@ const MOCK_EFICIENCIA: ChartSeries = {
   ],
 };
 
-const MOCK_MACRO: MacroGroup[] = [
+// Datos del modelo — Entregable Final ARAUCO · Junio 2026
+// Fuentes: Banco de México, Fed, World Bank Commodity Outlook Abr 2026,
+// nota socio formador (urea/metanol), NYU Stern V-Lab (volatilidad)
+const MACRO_DATA: MacroGroup[] = [
   {
     category: "Divisas",
     items: [
-      { label: "USD / MXN", value: 17.31, display: null, unit: "MXN", change: 0.08 },
+      // Spot base del modelo de cobertura (Banxico FIX · Jun 2026)
+      { label: "USD / MXN", value: 17.4563, display: null, unit: "MXN", change: -0.37 },
+      // FRED DEXMXUS / Bloomberg · consolidado holding chileno
       { label: "USD / CLP", value: 900.71, display: null, unit: "CLP", change: 0.33 },
+      // Relevante para maquinaria y repuestos europeos
       { label: "EUR / USD", value: 1.1605, display: null, unit: "USD", change: -0.17 },
     ],
   },
   {
     category: "Commodities",
     items: [
-      { label: "Urea", value: 2.91, display: null, unit: "Proxy: Gas Natural HH", change: -3.68 },
-      { label: "Metanol", value: 2.91, display: null, unit: "Proxy: Gas Natural HH", change: -3.68 },
-      { label: "Petróleo Brent", value: 103.54, display: null, unit: "USD/bbl", change: 0.94 },
+      // Precio histórico de compra — nota socio formador (Tabla 1, Entregable Final)
+      { label: "Urea", value: 665, display: null, unit: "USD/t", change: 5.26 },
+      // Precio histórico de compra — nota socio formador (Tabla 1, Entregable Final)
+      { label: "Metanol", value: 1486.30, display: null, unit: "USD/t", change: 3.82 },
+      // EIA Brent Spot FOB · choque energético +17.9% YoY
+      { label: "Petróleo Brent", value: 84.87, display: null, unit: "USD/bbl", change: 1.12 },
     ],
   },
   {
     category: "Tasas & Macro",
     items: [
+      // Banxico — ciclo de recortes cerrado en mayo 2026
       { label: "Tasa Banxico", value: 6.50, display: null, unit: "%", change: null },
+      // Fed — FOMC dividido; rango objetivo
       { label: "Tasa Fed", value: null, display: "3.50–3.75", unit: "%", change: null },
+      // INEGI · IPC — por encima del techo de Banxico (3% ±1%)
       { label: "Inflación México (IPC)", value: 4.45, display: null, unit: "% anual", change: null },
     ],
   },
@@ -102,5 +114,5 @@ export const api = {
   getKPIs: () => fetchAPI<KPI[]>("/dashboard/kpis", MOCK_KPIS),
   getProduccionMensual: () => fetchAPI<ChartSeries>("/dashboard/produccion-mensual", MOCK_PRODUCCION),
   getEficienciaPorPlanta: () => fetchAPI<ChartSeries>("/dashboard/eficiencia-por-planta", MOCK_EFICIENCIA),
-  getMacro: () => fetchAPI<MacroGroup[]>("/dashboard/macro", MOCK_MACRO),
+  getMacro: () => Promise.resolve(MACRO_DATA),
 };
